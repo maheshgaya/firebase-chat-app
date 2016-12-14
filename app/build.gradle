@@ -29,6 +29,11 @@ android {
         exclude 'META-INF/LICENSE-FIREBASE.txt'
         exclude 'META-INF/NOTICE'
     }
+    repositories {
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+    }
 }
 
 dependencies {
@@ -42,5 +47,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.6.1'
     //Realtime database
     compile 'com.google.firebase:firebase-database:10.0.1'
+    //Authentication
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+    // FirebaseUI Auth
+    compile 'com.firebaseui:firebase-ui-auth:1.0.1'
 }
 apply plugin: 'com.google.gms.google-services'
