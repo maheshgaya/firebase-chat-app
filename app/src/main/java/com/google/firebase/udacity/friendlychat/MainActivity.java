@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     public static final int RC_SIGN_IN = 1;
+    public static final int RC_PHOTO_PICKER = 2;
 
     private String mUsername;
 
@@ -101,7 +102,11 @@ public class MainActivity extends AppCompatActivity {
         mPhotoPickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Fire an intent to show an image picker
+                // Fire an intent to show an image picker
+                Intent photoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                photoIntent.setType("image/jpeg");
+                photoIntent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(photoIntent, "Complete action using"), RC_PHOTO_PICKER);
             }
         });
 
@@ -184,7 +189,8 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                    FriendlyMessage friendlyMessage = dataSnapshot.getValue(FriendlyMessage.class);
+                    mMessageAdapter.remove(friendlyMessage);
                 }
 
                 @Override
